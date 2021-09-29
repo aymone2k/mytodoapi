@@ -2,10 +2,22 @@ const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const path = require('path');
+const database = require('./middleware/dataBase')
 require('dotenv').config();
 
-require('./middleware/dataBase').config()
+module.exports = async (arg1, arg2, arg3) => {
 
+  await database().then(async mongoose => {
+      try{
+          console.log('Connected to database!!');
+          await command.execute(client, message, args);
+      }
+      finally{
+          mongoose.connection.close();
+      }
+  });
+
+};
 
 const userRoutes = require('./routes/user.route');
 const todoRoutes = require('./routes/todo.route');
